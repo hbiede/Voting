@@ -4,7 +4,6 @@ include("php/header.php");
 confirmLoggedInVoter();
 ?>
 
-<?php include("php/navbar.php");?>
 <!-- TODO: EVERYTHING -->
 
 <?php include("php/footer.php");?>

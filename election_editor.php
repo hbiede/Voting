@@ -1,8 +1,7 @@
 <?php
 $_REQUEST['title'] = 'Election Editor';
 include("php/header.php");
-
-include("php/navbar.php");?>
+?>
 
 <h1>Election Editor</h1>
 

@@ -38,3 +38,5 @@ echo '<!DOCTYPE html>
 	</head>
 	<body>
 	<div class="main-vote-container">';
+
+    include ("navbar.php");

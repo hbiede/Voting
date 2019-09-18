@@ -1,7 +1,6 @@
 <?php
 $_REQUEST['title'] = 'Login';
 include("php/header.php");
-include("php/navbar.php");
 
 if (loggedInSuperAdmin()) {
     redirect("superadmin_dashboard.php");

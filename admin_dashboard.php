@@ -1,8 +1,7 @@
 <?php $_REQUEST['title'] = 'Admin Dashboard';
 include("php/header.php");
 confirmLoggedInAdmin();
-
-include("php/navbar.php");?>
+?>
 <!-- TODO: EVERYTHING -->
 
     <h1>Admin Dashboard</h1>
