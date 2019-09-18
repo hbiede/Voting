@@ -1,5 +1,7 @@
 <?php $_REQUEST['title'] = 'Organization Picker';
-include("php/header.php");?>
+include("php/header.php");
+confirmLoggedInSuperAdmin();
+?>
 
 <?php include("php/navbar.php");?>
 <!-- TODO: EVERYTHING -->
