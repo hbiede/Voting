@@ -40,7 +40,6 @@ create table users
     voterID      varchar(30)                         not null,
     password     varchar(30)                         not null,
     voted        int(1)    default 0                 not null,
-    primaryVoter int       default 1                 not null,
     timeCreated  timestamp default CURRENT_TIMESTAMP not null,
     lastModified timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     constraint users_voterID_uindex unique (voterID),
