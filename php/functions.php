@@ -7,15 +7,15 @@ require_once("connection.php");
  */
 
 function loggedInSuperAdmin() {
-    // TODO return if logged in as a superadmin
+    return isset($_SESSION['superAdmin']);
 }
 
 function loggedInAdmin() {
-    // TODO return if logged in as an admin
+    return isset($_SESSION['admin']);
 }
 
 function loggedInVoter() {
-    // TODO return if logged in as a voter
+    return isset($_SESSION['voterID']);
 }
 
 
@@ -25,25 +25,25 @@ function loggedIn() {
 
 function confirmLoggedInSuperAdmin() {
     if (!loggedInSuperAdmin()) {
-        redirect_to("login.html");
+        redirect("login.html");
     }
 }
 
 function confirmLoggedInAdmin() {
     if (!loggedInAdmin()) {
-        redirect_to("login.html");
+        redirect("login.html");
     }
 }
 
 function confirmLoggedInVoter() {
     if (!loggedInVoter()) {
-        redirect_to("login.html");
+        redirect("login.html");
     }
 }
 
 function confirmLoggedIn() {
     if (!loggedIn()) {
-        redirect_to("login.html");
+        redirect("login.html");
     }
 }
 
