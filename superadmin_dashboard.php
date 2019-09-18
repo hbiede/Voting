@@ -1,5 +1,7 @@
 <?php $_REQUEST['title'] = 'Super Admin Dashboard';
-include("php/header.php");?>
+include("php/header.php");
+confirmLoggedInSuperAdmin();
+?>
 
 <?php include("php/navbar.php");?>
 <!-- TODO: EVERYTHING -->
