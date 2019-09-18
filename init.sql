@@ -31,8 +31,8 @@ create table users
 (
     id           int auto_increment                  primary key,
     electionID   int                                 not null,
-    voterID      varchar(255)                         not null,
-    password     varchar(255)                         not null,
+    voterID      varchar(255)                        not null,
+    password     varchar(255)                        not null,
     voted        int(1)    default 0                 not null,
     timeCreated  timestamp default CURRENT_TIMESTAMP not null,
     lastModified timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
