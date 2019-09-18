@@ -21,6 +21,7 @@ create table elections
     electionOpen     int(1)    default 0                 not null,
     voters           int       default 0                 not null,
     organizationID   int                                 not null,
+    positionOrder    varchar(255)                        not null,
     timeCreated      timestamp default CURRENT_TIMESTAMP not null,
     lastModified     timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     constraint Elections_Organizations_organizationID_fk foreign key (organizationID) references organizations (id)
@@ -49,28 +50,17 @@ create table admins
     constraint Admins_Organizations_organizationID_fk foreign key (organizationID) references organizations (id)
 );
 
-create table candidates
-(
-    id                       int auto_increment                  primary key,
-    candidateID              varchar(255)                        not null,
-    organizationID           int                                 not null,
-    firstName                varchar(255)                        not null,
-    lastName                 varchar(255)                        not null,
-    position                 varchar(255)                        not null,
-    lastModified             timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-    timeCreated              timestamp default CURRENT_TIMESTAMP not null,
-    constraint candidates_candidateID_organizationID_uindex unique (candidateID, organizationID),
-    constraint Candidates_Organizations_organizationID_fk foreign key (organizationID) references organizations (id)
-);
-
 create table ballot_entries
 (
-	id          int auto_increment primary key,
-	candidateID int                not null,
-	electionID  int                not null,
-	votes       int                not null default 0,
+	id              int auto_increment primary key,
+	candidateID     int                not null,
+    organizationID  int                not null,
+    firstName       varchar(255)       not null,
+    lastName        varchar(255)       not null,
+    position        varchar(255)       not null,
+	electionID      int                not null,
+	votes           int                not null default 0,
 	constraint candidates_candidateID_electionID_uindex unique (candidateID, electionID),
-	constraint Ballot_Entries_Candidates_candidateID_fk foreign key (candidateID) references candidates (id),
     constraint Ballot_Entries_Elections_electionID_fk foreign key (electionID) references elections (id)
 );
 
