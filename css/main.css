@@ -2,6 +2,10 @@
     background-color: #162E71;
 }
 
+.main-vote-container {
+    padding-top: 75px;
+}
+
 /*
  * Login Page - Bootstrap CSS
  */
