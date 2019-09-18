@@ -1,5 +1,7 @@
 <?php
 
+require_once("php/functions.php");
+
 if (isset($_GET['title'])) {
     $title = $_GET['title'];
 } else {

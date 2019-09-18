@@ -1,4 +1,5 @@
-<?php include("php/header.php?title=Admin%20Dashboard");?>
+<?php $_REQUEST['title'] = 'Admin Dashboard';
+include("php/header.php");?>
 
 <?php include("php/navbar.php");?>
 <!-- TODO: EVERYTHING -->

@@ -1,4 +1,5 @@
-<?php include("php/header.php?title=Organization%20Picker");?>
+<?php $_REQUEST['title'] = 'Organization Picker';
+include("php/header.php");?>
 
 <?php include("php/navbar.php");?>
 <!-- TODO: EVERYTHING -->
