@@ -52,15 +52,14 @@ create table admins
 
 create table ballot_entries
 (
-	id              int auto_increment primary key,
-	candidateID     int                not null,
-    organizationID  int                not null,
-    firstName       varchar(255)       not null,
-    lastName        varchar(255)       not null,
-    position        varchar(255)       not null,
-	electionID      int                not null,
-	votes           int                not null default 0,
-	constraint candidates_candidateID_electionID_uindex unique (candidateID, electionID),
+	id              int auto_increment                  primary key,
+    electionID      int                                 not null,
+    firstName       varchar(255)                        not null,
+    lastName        varchar(255)                        not null,
+    position        varchar(255)                        not null,
+	votes           int default 0                       not null,
+    timeCreated     timestamp default CURRENT_TIMESTAMP not null,
+    lastModified    timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     constraint Ballot_Entries_Elections_electionID_fk foreign key (electionID) references elections (id)
 );
 
