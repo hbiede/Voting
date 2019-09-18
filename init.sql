@@ -30,13 +30,13 @@ create table users
 (
     id           int auto_increment                  primary key,
     electionID   int                                 not null,
-    voterID      varchar(30)                         not null,
-    password     varchar(30)                         not null,
+    voterID      varchar(255)                         not null,
+    password     varchar(255)                         not null,
     voted        int(1)    default 0                 not null,
     timeCreated  timestamp default CURRENT_TIMESTAMP not null,
     lastModified timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-    constraint users_voterID_uindex unique (voterID),
-    constraint Users_Elections_electionID_fk foreign key (electionID) references elections (id)
+    constraint Users_Elections_electionID_fk foreign key (electionID) references elections (id),
+    constraint users_voterID_uindex unique (voterID)
 );
 
 create table admins
