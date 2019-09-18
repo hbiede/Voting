@@ -11,7 +11,7 @@ function loggedInSuperAdmin() {
 }
 
 function loggedInAdmin() {
-    return isset($_SESSION['admin']);
+    return isset($_SESSION['admin']) || isset($_SESSION['orgID']);
 }
 
 function loggedInVoter() {
@@ -24,26 +24,34 @@ function loggedIn() {
 }
 
 function confirmLoggedInSuperAdmin() {
-    if (!loggedInSuperAdmin()) {
-        redirect("login.html");
+    if (!loggedInSuperAdmin() && !loggedIn()) {
+        redirect("login.php");
+    } elseif (loggedInAdmin()) {
+        redirect("admin_dashboard.php");
+    } elseif (loggedInVoter()) {
+        redirect('voting.php');
     }
 }
 
 function confirmLoggedInAdmin() {
-    if (!loggedInAdmin()) {
-        redirect("login.html");
+    if (!loggedInAdmin() && !loggedIn()) {
+        redirect("login.php");
+    } elseif (loggedInSuperAdmin()) {
+        redirect("organization_picker.php");
+    } elseif (loggedInVoter()) {
+        redirect('voting.php');
     }
 }
 
 function confirmLoggedInVoter() {
     if (!loggedInVoter()) {
-        redirect("login.html");
+        redirect("login.php");
     }
 }
 
 function confirmLoggedIn() {
     if (!loggedIn()) {
-        redirect("login.html");
+        redirect("login.php");
     }
 }
 
@@ -51,16 +59,80 @@ function confirmLoggedIn() {
 /*
  * Election-specific SQL functions
  */
-function confirmCredentialsVoter($username, $password) {
-    // TODO return if a voter username and password are valid
+function confirmCredentialsVoter($voterID, $password) {
+    global $connection;
+
+    // entered a password
+    if (!empty($voterID) && !empty($password)) {
+        $query = "SELECT voterID,password FROM users WHERE voterID='{$voterID}'";
+
+        // SQL error prevention
+        if ($executeQuery = mysqli_query($connection, $query)) {
+
+            // only one such voterID
+            if ((mysqli_num_rows($executeQuery) == 1)) {
+                while ($row = mysqli_fetch_assoc($executeQuery)) {
+                    $dbPassword = $row['password'];
+
+                    // password match detection
+                    if ($password == $dbPassword) {
+                        $_SESSION['voterID'] = $row['voterID'];
+                        redirect("voting.php");
+                    } else {
+                        $_SESSION['error'] = "Enter correct username and password";
+                        redirect("login.php");
+                    }
+                }
+            } else {
+                $_SESSION['error'] = "Enter correct username and password";
+                redirect("login.php");
+            }
+        }
+    } else {
+        $_SESSION['error'] = "Fill all fields";
+        redirect("login.php");
+    }
 }
 
 function confirmCredentialsAdmin($username, $password) {
-    // TODO return if an admin username and password are valid
-}
+    global $connection;
 
-function confirmCredentialsSuperAdmin($username, $password) {
-    // TODO return if a super admin username and password are valid
+    // entered a password
+    if (!empty($username) && !empty($password)) {
+        $query = "SELECT username,password,isSuperAdmin FROM admins WHERE username='{$username}'";
+
+        // SQL error prevention
+        if ($executeQuery = mysqli_query($connection, $query)) {
+
+            // only one such voterID
+            if ((mysqli_num_rows($executeQuery) == 1)) {
+                while ($row = mysqli_fetch_assoc($executeQuery)) {
+                    $dbPassword = $row['password'];
+
+                    // password match detection
+                    if ($password == $dbPassword) {
+                        $_SESSION['username'] = $row['username'];
+                        if ($row['isSuperAdmin'] == 0) {
+                            $_SESSION['admin'] = $username;
+                            redirect("admin_dashboard.php");
+                        } else {
+                            $_SESSION['superAdmin'] = $username;
+                            redirect("superadmin_dashboard.php");
+                        }
+                    } else {
+                        $_SESSION['error'] = "Enter correct username and password";
+                        redirect("login.php");
+                    }
+                }
+            } else {
+                $_SESSION['error'] = "Enter correct username and password";
+                redirect("login.php");
+            }
+        }
+    } else {
+        $_SESSION['error'] = "Fill all fields";
+        redirect("login.php");
+    }
 }
 
 function getOrganizationName() {
