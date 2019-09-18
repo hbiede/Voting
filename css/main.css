@@ -97,3 +97,11 @@
         color: #777;
     }
 }
+
+/*
+ * Election Editor CSS
+ */
+
+ul.election-editor-list {
+    list-style-type: none;
+}
