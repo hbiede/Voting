@@ -106,6 +106,6 @@
  * Election Editor CSS
  */
 
-ul.election-editor-list {
+ul.election-editor-list,ul.election-editor-inner-list {
     list-style-type: none;
 }
