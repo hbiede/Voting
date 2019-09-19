@@ -73,7 +73,6 @@ include("php/header.php");
         let candidateData = $('.election-editor-inner-list');
         if (candidateData.length > 0) {
             candidateData.toArray().forEach(function(data) {
-            	console.log("C1: " + data);
                 pushCandidates(data);
             });
         }
@@ -87,7 +86,6 @@ include("php/header.php");
     			array.push(data.children[i].innerText.split(/\r?\n/)[0]); //split on new lines accounting for Windows
     		}
 			array.unshift(data.parentNode.firstChild.innerText.split(/\r?\n/)[0]);
-			console.log(array);
 			$.ajax({
 				data: {candidateList: JSON.stringify(array)},
 				type: 'POST',
@@ -96,7 +94,6 @@ include("php/header.php");
 					window.alert("C" + data);
 				}
 			});
-			console.log(array);
 		}
 	}
 </script>
