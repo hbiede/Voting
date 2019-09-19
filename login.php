@@ -47,7 +47,7 @@ if (isset($_GET['username']) || isset($_POST['username'])) {
         </div>
         <?php if (isset($_SESSION['error'])) {
             echo '<div class="alert alert-danger text-center" role="alert">'.$_SESSION['error'].'</div>';
-        } unset($_SESSION['error'])?>
+        } unset($_SESSION['error']);?>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="si" value="Sign in">Sign in</button>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="si" value="Sign in - Admin">Sign in - Admin</button>
         <p class="mt-5 mb-3 text-muted text-center">©2019 - Hundter Biede</p>
