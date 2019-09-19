@@ -1,3 +1,3 @@
 <?php
 
-echo $_POST['positionList'];
+echo json_decode($_POST['positionList']);
