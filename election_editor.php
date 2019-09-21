@@ -22,11 +22,12 @@ include("php/header.php");
     function addPosition() {
         let pos = "";
         do {
-            pos = window.prompt("Position Title:")
-        } while (pos && pos.trim() === "");
+            pos = window.prompt("Position Title:");
+        } while (!pos || pos.trim() === "");
+        pos = pos.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g,"$quot;").replace(/'‘’/g,"$apos;"); // clean up the input for display
 
         let li = document.createElement("li");
-        li.className = "position-list"
+        li.className = "position-list";
         li.innerHTML = '<div class="alert alert-secondary" role="form">' + pos + '<button type="button" class="close" aria-label="Add" onclick="addCandidate(this.parentNode.parentNode);">&plus;</button><button type="button" class="close" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><ul class="election-editor-inner-list"></ul>';
 
         let list = $('.election-editor-list');
@@ -38,8 +39,9 @@ include("php/header.php");
     function addCandidate(parent) {
         let name = "";
         do {
-            name = window.prompt("Candidate Name:")
-        } while (name && name.trim() === "");
+            name = window.prompt("Candidate Name:");
+        } while (!name || name.trim() === "");
+        name = name.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g,"$quot;").replace(/'‘’/g,"$apos;"); // clean up the input for display
 
         let ul;
         if (parent.getElementsByTagName("ul")) {
