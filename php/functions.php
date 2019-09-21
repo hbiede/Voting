@@ -11,7 +11,7 @@ function loggedInSuperAdmin() {
 }
 
 function loggedInAdmin() {
-    return isset($_SESSION['admin']) || isset($_SESSION['orgID']);
+    return isset($_SESSION['organizationID']);
 }
 
 function loggedInVoter() {
