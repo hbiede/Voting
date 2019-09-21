@@ -71,8 +71,8 @@ if (isset($_GET['electionID'])) {
         let positionData = $('.election-editor-list').children();
         let array = [];
         positionData.toArray().forEach(function (data) {
-            array.push(data.innerText.split(/\r?\n/)[0]);
-        })
+            array.push(data.innerText.split(/\r?\n/)[0].replace(",","\\,")); // no commas
+        });
 
         $.ajax({
             data: {positionList: JSON.stringify(array)},
@@ -98,7 +98,10 @@ if (isset($_GET['electionID'])) {
     		}
 			array.unshift(data.parentNode.firstChild.innerText.split(/\r?\n/)[0]);
 			$.ajax({
-				data: {candidateList: JSON.stringify(array)},
+				data: {
+				    candidateList: JSON.stringify(array),
+                    organizationID: $('.election-editor-heading')[0].id
+                },
 				type: 'POST',
 				url: 'php/pushCandidates.php',
 				success: function(data) {
