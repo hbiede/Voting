@@ -1,5 +1,5 @@
 <?php require_once("php/functions.php");
-$_REQUEST['title'] = "Voting - ". getOrganizationName();
+$_REQUEST['title'] = "Voting - ". getOrganizationName(getMyElectionID($_SESSION['voterCode']));
 include("php/header.php");
 confirmLoggedInVoter();
 ?>
