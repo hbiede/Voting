@@ -99,7 +99,7 @@ function confirmCredentialsAdmin($username, $password) {
 
     // entered a password
     if (!empty($username) && !empty($password)) {
-        $query = "SELECT username,password,isSuperAdmin FROM admins WHERE username='{$username}'";
+        $query = "SELECT username,password,isSuperAdmin,organizationID FROM admins WHERE username='{$username}'";
 
         // SQL error prevention
         if ($executeQuery = mysqli_query($connection, $query)) {
@@ -114,6 +114,7 @@ function confirmCredentialsAdmin($username, $password) {
                         $_SESSION['username'] = $row['username'];
                         if ($row['isSuperAdmin'] == 0) {
                             $_SESSION['admin'] = $username;
+                            $_SESSION['organizationID'] = $row['organizationID'];
                             redirect("admin_dashboard.php");
                         } else {
                             $_SESSION['superAdmin'] = $username;
