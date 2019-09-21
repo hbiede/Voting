@@ -1,16 +1,25 @@
 <?php
 $_REQUEST['title'] = 'Election Editor';
 include("php/header.php");
+confirmLoggedInAdmin();
+
+if (isset($_GET['electionID'])) {
+    $electionID = $_GET['electionID'];
+} elseif(!isset($_SESSION['error'])) {
+    $electionID = createElection($_SESSION['organizationID']);
+}
+
 ?>
 
-<h1>Election Editor</h1>
+<h1 class="election-editor-heading" id="<?php echo $electionID?>">Election Editor</h1>
 
 <?php if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger text-center" role="alert">'.$_SESSION['error'].'</div>';
+    echo '<div class="alert alert-danger text-center php-error-alert" role="alert">'.$_SESSION['error'].'</div>';
 } unset($_SESSION['error']);?>
 
 
 <ul class="election-editor-list">
+
 </ul>
 
 <button class="btn btn-primary" onclick="addPosition();">Add Position</button>
