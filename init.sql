@@ -54,8 +54,7 @@ create table ballot_entries
 (
 	id              int auto_increment                  primary key,
     electionID      int                                 not null,
-    firstName       varchar(255)                        not null,
-    lastName        varchar(255)                        not null,
+    name            varchar(255)                        not null,
     position        varchar(255)                        not null,
 	votes           int default 0                       not null,
     timeCreated     timestamp default CURRENT_TIMESTAMP not null,
