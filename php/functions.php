@@ -264,6 +264,10 @@ function prepMySQLString($string) {
     return $string;
 }
 
+/**
+ * Redirects the user to a given location
+ * @param $loc string URL to which to redirect the user
+ */
 function redirect($loc) {
     if ($loc != NULL) {
         header("Location:{$loc}");
