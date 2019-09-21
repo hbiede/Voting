@@ -104,7 +104,7 @@ function confirmCredentialsAdmin($username, $password) {
         // SQL error prevention
         if ($executeQuery = mysqli_query($connection, $query)) {
 
-            // only one such voterID
+            // only one such username
             if ((mysqli_num_rows($executeQuery) == 1)) {
                 while ($row = mysqli_fetch_assoc($executeQuery)) {
                     $dbPassword = $row['password'];
