@@ -15,7 +15,7 @@ function loggedInAdmin() {
 }
 
 function loggedInVoter() {
-    return isset($_SESSION['voterID']);
+    return isset($_SESSION['voterCode']);
 }
 
 
@@ -59,24 +59,24 @@ function confirmLoggedIn() {
 /*
  * Election-specific SQL functions
  */
-function confirmCredentialsVoter($voterID, $password) {
+function confirmCredentialsVoter($voterCode, $password) {
     global $connection;
 
     // entered a password
-    if (!empty($voterID) && !empty($password)) {
-        $query = "SELECT voterID,password FROM users WHERE voterID='{$voterID}'";
+    if (!empty($voterCode) && !empty($password)) {
+        $query = "SELECT voterCode,password FROM users WHERE voterCode='{$voterCode}'";
 
         // SQL error prevention
         if ($executeQuery = mysqli_query($connection, $query)) {
 
-            // only one such voterID
+            // only one such voterCode
             if ((mysqli_num_rows($executeQuery) == 1)) {
                 while ($row = mysqli_fetch_assoc($executeQuery)) {
                     $dbPassword = $row['password'];
 
                     // password match detection
                     if ($password == $dbPassword) {
-                        $_SESSION['voterID'] = $row['voterID'];
+                        $_SESSION['voterCode'] = $row['voterCode'];
                         redirect("voting.php");
                     } else {
                         $_SESSION['error'] = "Enter correct username and password";
