@@ -103,6 +103,18 @@
 }
 
 /*
+ * (Super) Admin Dashboard
+ */
+
+.card-body input {
+    margin-bottom: 15px;
+}
+
+.card-body input:last-child {
+    margin-bottom: 0;
+}
+
+/*
  * Election Editor CSS
  */
 
