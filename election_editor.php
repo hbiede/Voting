@@ -75,7 +75,10 @@ if (isset($_GET['electionID'])) {
         });
 
         $.ajax({
-            data: {positionList: JSON.stringify(array)},
+            data: {
+                positionList: JSON.stringify(array),
+                organizationID: $('.election-editor-heading')[0].id
+            },
             type: 'POST',
             url: 'php/pushPositions.php'
         });
