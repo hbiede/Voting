@@ -98,6 +98,22 @@ include("php/header.php");
 			});
 		}
 	}
+
+	$(function() {
+        // generate lists from database
+        if ($('.php-error-alert').length === 0) {
+            $.ajax({
+                data: {
+                    electionID: $('.election-editor-heading')[0].id
+                },
+                type: 'POST',
+                url: 'php/generateElectionEditorList.php',
+                success: function (data) {
+                    $('.election-editor-list')[0].innerHTML = data;
+                }
+            });
+        }
+    })
 </script>
 
 <?php include("php/footer.php");?>
