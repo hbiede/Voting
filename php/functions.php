@@ -70,12 +70,12 @@ function confirmCredentialsVoter($voterCode, $password) {
         if ($executeQuery = mysqli_query($connection, $query)) {
 
             // only one such voterCode
-            if ((mysqli_num_rows($executeQuery) == 1)) {
+            if ((mysqli_num_rows($executeQuery) === 1)) {
                 while ($row = mysqli_fetch_assoc($executeQuery)) {
                     $dbPassword = $row['password'];
 
                     // password match detection
-                    if ($password == $dbPassword) {
+                    if ($password === $dbPassword) {
                         $_SESSION['voterCode'] = $row['voterCode'];
                         redirect("voting.php");
                     } else {
@@ -105,14 +105,14 @@ function confirmCredentialsAdmin($username, $password) {
         if ($executeQuery = mysqli_query($connection, $query)) {
 
             // only one such username
-            if ((mysqli_num_rows($executeQuery) == 1)) {
+            if ((mysqli_num_rows($executeQuery) === 1)) {
                 while ($row = mysqli_fetch_assoc($executeQuery)) {
                     $dbPassword = $row['password'];
 
                     // password match detection
-                    if ($password == $dbPassword) {
+                    if ($password === $dbPassword) {
                         $_SESSION['username'] = $row['username'];
-                        if ($row['isSuperAdmin'] == 0) {
+                        if ($row['isSuperAdmin'] === 0) {
                             $_SESSION['admin'] = $username;
                             $_SESSION['organizationID'] = $row['organizationID'];
                             redirect("admin_dashboard.php");

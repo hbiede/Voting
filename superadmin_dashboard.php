@@ -3,10 +3,10 @@ include("php/header.php");
 confirmLoggedInSuperAdmin();
 
 global $connection;
-if (($_SERVER['REQUEST_METHOD'] == 'POST')) {
-    if (isset($_POST['create_org']) && $_POST['create_org'] == 'Create Organization') {
+if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
+    if (isset($_POST['create_org']) && $_POST['create_org'] === 'Create Organization') {
         $orgName = prepMySQLString($_POST['orgName']);
-        if (trim($orgName) != "") {
+        if (trim($orgName) !== "") {
             $query = "INSERT INTO organizations (organizationName) VALUES ('{$orgName}');";
         } else {
             $_SESSION['error'] = "Please give the organization an actual name";

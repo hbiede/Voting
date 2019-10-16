@@ -13,7 +13,7 @@ if (loggedInSuperAdmin()) {
 global $connection;
 if (isset($_GET['username']) || isset($_POST['username'])) {
     if ((isset($_GET['username']) && isset($_GET['password'])) || (isset($_POST['username']) && isset($_POST['password']))) {
-        if ($_POST['si'] == 'Sign in - Admin') {
+        if ($_POST['si'] === 'Sign in - Admin') {
             $username = prepMySQLString(isset($_POST['username']) ? $_POST['username'] : $_GET['username']);
             $password = sha1(prepMySQLString(isset($_POST['password']) ? $_POST['password'] : $_GET['password']));
             confirmCredentialsAdmin($username, $password);
