@@ -21,6 +21,7 @@ create table elections
     electionOpen     int(1)    default 0                 not null,
     voters           int       default 0                 not null,
     organizationID   int                                 not null,
+    electionName     varchar(255)                        not null,
     positionOrder    varchar(255)                        not null,
     timeCreated      timestamp default CURRENT_TIMESTAMP not null,
     lastModified     timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,

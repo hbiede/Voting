@@ -2,10 +2,11 @@
 include("php/header.php");
 confirmLoggedInSuperAdmin();
 
-// Set $_SESSION['orgID']
+if ($_POST['si'] === 'choose') {
+    $_SESSION['organizationID'] = $_POST['orgIDSelection'];
+}
 ?>
 
-<!-- TODO: EVERYTHING -->
 
 <form action="organization_picker.php" method="POST">
 
@@ -23,7 +24,7 @@ confirmLoggedInSuperAdmin();
                     echo "<option value=\"$orgID\">$orgName</option>";
                 }
                 echo '</select>';
-                echo '<input type="submit" class="btn btn-primary">';
+                echo '<input type="submit" class="btn btn-primary" name="choose" value="choose">';
             } else {
                 echo '<div class="alert alert-danger text-center php-error-alert" role="alert">No Organizations Exist</div>';
             }

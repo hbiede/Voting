@@ -1,5 +1,9 @@
-<?php require_once("php/functions.php");
-$_REQUEST['title'] = "Voting - ". getOrganizationName(getMyElectionID($_SESSION['voterCode']));
+<?php
+require_once("php/functions.php");
+if (hasVoted($_SESSION['voterCode'])) {
+    redirect("voted.php");
+}
+$_REQUEST['title'] = "Voting - " . getMyElectionName($_SESSION['voterCode']);
 include("php/header.php");
 confirmLoggedInVoter();
 ?>

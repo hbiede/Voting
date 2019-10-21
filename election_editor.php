@@ -117,12 +117,13 @@ if (isset($_GET['electionID'])) {
 	$(function() {
         // generate lists from database
         if ($('.php-error-alert').length === 0) {
+            let electionID = $(".election-editor-heading").id;
             $.ajax({
                 data: {
                     electionID: $('.election-editor-heading')[0].id
                 },
                 type: 'POST',
-                url: 'php/generateElectionEditorList.php',
+                url: 'php/generateElectionEditorList.php?electionID=' + electionID,
                 success: function (data) {
                     $('.election-editor-list')[0].innerHTML = data;
                 }

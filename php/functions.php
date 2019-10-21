@@ -64,7 +64,7 @@ function confirmCredentialsVoter($voterCode, $password) {
 
     // entered a password
     if (!empty($voterCode) && !empty($password)) {
-        $query = "SELECT voterCode,password FROM users WHERE voterCode='{$voterCode}'";
+        $query = "SELECT voterCode,password,electionID FROM users WHERE voterCode='{$voterCode}'";
 
         // SQL error prevention
         if ($executeQuery = mysqli_query($connection, $query)) {
@@ -77,6 +77,7 @@ function confirmCredentialsVoter($voterCode, $password) {
                     // password match detection
                     if ($password === $dbPassword) {
                         $_SESSION['voterCode'] = $row['voterCode'];
+                        $_SESSION['electionID'] = $row['electionID'];
                         redirect("voting.php");
                     } else {
                         $_SESSION['error'] = "Enter correct username and password";
@@ -87,6 +88,9 @@ function confirmCredentialsVoter($voterCode, $password) {
                 $_SESSION['error'] = "Enter correct username and password";
                 redirect("login.php");
             }
+        } else {
+            $_SESSION['error'] = "SQL Error";
+            redirect("login.php");
         }
     } else {
         $_SESSION['error'] = "Fill all fields";
@@ -129,6 +133,9 @@ function confirmCredentialsAdmin($username, $password) {
                 $_SESSION['error'] = "Enter correct username and password";
                 redirect("login.php");
             }
+        } else {
+            $_SESSION['error'] = "SQL Error";
+            redirect("login.php");
         }
     } else {
         $_SESSION['error'] = "Fill all fields";
@@ -162,6 +169,14 @@ function createElection($orgID) {
  * @return int The ID representing the organization in the DB
  */
 function getMyElectionID($voterCode) {
+    return 0;
+}
+
+/**
+ * @param $voterCode string Represents the voter (the username for the voter)
+ * @return string The Name representing the organization in the DB
+ */
+function getMyElectionName($voterCode) {
     return 0;
 }
 
